@@ -1,0 +1,26 @@
+<main role="main" class="container-main">
+  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <%= @inner_content %>
+  <button onclick="topFunction()" class="back-to-top pagination-link" title="Go to top">
+    <div><img src="<%= Routes.static_path(@conn, "/images/arrow.svg") %>" alt="Back to top"/></div>
+    <div>Top</div>
+  </button>
+</main>
+<script defer type="text/javascript">
+  backToTopButton = document.querySelector(".back-to-top");
+  window.onscroll = function () { scrollFunction() };
+  function scrollFunction() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      backToTopButton.style.display = "grid";
+    } else {
+      backToTopButton.style.display = "none";
+    }
+  }
+  function topFunction() {
+    window.scroll({
+    top: 0,
+    behavior: 'smooth'
+  });
+  }
+</script>

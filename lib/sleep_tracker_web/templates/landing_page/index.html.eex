@@ -1,0 +1,7 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "SleepTracker" %></h1>
+  <p>Track your sleep over time and analyze the data.</p>
+</section>
+<%= if @current_user do %>
+  <%= link "Go to readings", to: Routes.reading_path(@conn, :index), class: "button" %>
+<% end %>

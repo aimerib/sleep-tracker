@@ -1,0 +1,75 @@
+# This file is used for production deployment.
+# if you are developing with wizart any changes made here will be ignored.
+
+version: "3.8"
+
+networks:
+  caddy_network:
+
+volumes:
+  pgadmin:
+  caddy_data:
+  portainer_data:
+
+services:
+  # proxy:
+  #   image: nginx
+  #   networks:
+  #     - nginx_network
+  #   volumes:
+  #     - ./config/nginx/phoenix.conf:/etc/nginx/conf.d/default.conf
+  #     - ./certs:/etc/certs
+  #     - nginx_data:/etc/nginx/error_log.log
+  #     - nginx_data:/etc/nginx/cache
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   depends_on:
+  #     - app
+  #     - db-manager
+  #     - portainer
+  proxy:
+    image: caddy:2.2.0
+    ports:
+      - "80:80"
+      - "443:443"
+      - "80:80/udp"
+      - "443:443/udp"
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_data:/config
+    restart: unless-stopped
+    networks:
+      - caddy_network
+    depends_on:
+      - portainer
+      - db-manager
+      - app
+  app:
+    image: aimeri/sleep_tracker:817e1cc1a667cedd7d8a4b18601e8b07cd578689
+    env_file:
+      - config/docker.env
+    networks:
+      - caddy_network
+    volumes:
+      - ./certs/ca-certificate.crt:/app/certs/ca-certificate.crt
+
+  db-manager:
+    image: dpage/pgadmin4
+    env_file:
+      - config/docker.env
+    networks:
+      - caddy_network
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    networks:
+      - caddy_network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data

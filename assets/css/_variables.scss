@@ -1,0 +1,16 @@
+$darken-factor: 15%;
+$selected-darken-factor: 25%;
+$purple: lighten(#5F4B8B, 10%);
+$dark-purple: darken($purple, 10%);
+$white: #fefefe;
+
+
+$family-sans-serif: "Nunito", sans-serif;
+$grey-dark: #0f0f0f;
+$grey-light: #9f9f9f;
+$primary: $purple;
+$secondary: $dark-purple;
+$text-light: $white;
+$text-dark: $grey-dark;
+$link: $primary;
+$link-hover: darken($primary, 10%);

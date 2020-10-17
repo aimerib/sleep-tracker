@@ -1,0 +1,184 @@
+#################################################
+# DO docker host deployment
+#################################################
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    # Sudo Group Setup
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: "^%wheel"
+        line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+        validate: "/usr/sbin/visudo -cf %s"
+
+    # User + Key Setup
+    - name: Create a new regular user with sudo privileges
+      user:
+        name: "{{ create_user }}"
+        state: present
+        groups: ["wheel"]
+        append: true
+        create_home: true
+        shell: /bin/bash
+
+    - name: Set authorized key for remote user
+      authorized_key:
+        user: "{{ create_user }}"
+        state: present
+        key: "{{ copy_local_key }}"
+
+    - name: Disable password authentication for root
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        regexp: "^#?PermitRootLogin"
+        line: "PermitRootLogin prohibit-password"
+
+    # Install Packages
+    - name: Update apt
+      apt:
+        update_cache: yes
+
+    - name: Install required system packages
+      apt:
+        name: "{{ sys_packages }}"
+        state: latest
+
+    # UFW Setup
+    - name: UFW - Allow SSH connections
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: UFW - Allow HTTP connections
+      ufw:
+        rule: allow
+        port: "80"
+        proto: tcp
+
+    - name: UFW - Allow HTTPS connections
+      ufw:
+        rule: allow
+        port: "443"
+        proto: tcp
+
+    - name: UFW - Deny all other incoming traffic by default
+      ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
+
+    # Install Docker
+    - name: Install required system packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop:
+        [
+          "apt-transport-https",
+          "ca-certificates",
+          "curl",
+          "software-properties-common",
+          "gnupg-agent",
+        ]
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        update_cache: yes
+        name: "{{ item }}"
+        state: latest
+      loop: ["docker-ce-cli", "containerd.io", "docker-ce"]
+
+    - name: Add user to "docker" group
+      user:
+        name: "{{ create_user }}"
+        group: "docker"
+        append: yes
+
+    - name: Get most recent docker-compose link
+      shell: curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -v '.sha256' | grep browser_download_url | grep "docker-compose-$(uname -s)-$(uname -m)" | cut -d '"' -f 4
+      args:
+        executable: /usr/bin/bash
+        warn: no
+      register: dc_link
+
+    - name: Install docker-compose
+      get_url:
+        url: "{{ dc_link.stdout }}"
+        dest: /usr/local/bin/docker-compose
+
+    - name: "Change docker-compose permissions"
+      file:
+        path: /usr/local/bin/docker-compose
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        mode: "0755"
+
+    - name: Add DigitalOcean repo key
+      apt_key:
+        url: https://repos.insights.digitalocean.com/sonar-agent.asc
+        state: present
+
+    - name: Add DigitalOcean Repository
+      apt_repository:
+        repo: deb https://repos.insights.digitalocean.com/apt/do-agent/ main main
+        state: present
+
+    - name: Update apt and install DigitalOcean agent
+      apt:
+        update_cache: yes
+        name: do-agent
+        state: latest
+
+    # - name: create app folder
+    #   file:
+    #     path: /app
+    #     state: directory
+    #     owner: "{{ create_user }}"
+    #     group: "{{ create_user }}"
+    #     mode: "0755"
+    # - name: create config folder
+    #   file:
+    #     path: /app
+    #     state: directory
+    #     owner: "{{ create_user }}"
+    #     group: "{{ create_user }}"
+    #     mode: "0755"
+
+    - name: create directory if they don't exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ create_user }}"
+        group: "{{ create_user }}"
+        mode: 0775
+      loop:
+        - /app
+        - /app/config
+
+    - name: Copy app
+      synchronize:
+        src: "{{ playbook_dir | dirname }}/config/docker.env"
+        dest: /app/config/docker.env

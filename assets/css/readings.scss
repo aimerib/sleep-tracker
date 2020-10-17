@@ -1,0 +1,330 @@
+@use 'mixins';
+@use 'variables' as *;
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+* a {
+  color: $link;
+}
+
+table {
+  max-width: 95%;
+  border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) {
+  background: #eee;
+}
+th {
+  background: darken($primary, 15%);
+  color: white;
+  font-weight: bold;
+}
+td,
+th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+td:last-child {
+  padding: 6px;
+}
+
+@media only screen and(min-width: 1670px) {
+  th {
+    min-width: 120px;
+  }
+  footer {
+    grid-auto-flow: column;
+  }
+  footer > a {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 1080px),
+  (min-device-width: 768px) and (max-device-width: 1080px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #aaa;
+    border-bottom: none;
+  }
+
+  tr:last-child {
+    border-bottom: 1px solid #aaa;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 50%;
+    display: grid;
+    grid-auto-flow: column;
+  }
+  td:last-child {
+    border-bottom: none;
+  }
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  td:nth-of-type(1):before {
+    content: "Reading taken";
+  }
+  td:nth-of-type(2):before {
+    content: "Sleep goal";
+  }
+  td:nth-of-type(3):before {
+    content: "Quality sleep goal";
+  }
+  td:nth-of-type(4):before {
+    content: "Deep sleep goal";
+  }
+  td:nth-of-type(5):before {
+    content: "Sleep percentage";
+  }
+  td:nth-of-type(6):before {
+    content: "Quality sleep percentage";
+  }
+  td:nth-of-type(7):before {
+    content: "Deep sleep percentage";
+  }
+  td:nth-of-type(8):before {
+    content: "Sleep hours";
+  }
+  td:nth-of-type(9):before {
+    content: "Quality sleep hours";
+  }
+  td:nth-of-type(10):before {
+    content: "Deep sleep hours";
+  }
+  td:nth-of-type(11):before {
+    content: "Bpm";
+  }
+  td:nth-of-type(12):before {
+    content: "Sleep rating";
+  }
+}
+
+footer {
+  display: grid;
+}
+
+.pagination {
+  font-size: 1rem;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-grow: 1;
+}
+.pagination ul {
+  list-style: none;
+}
+.pagination-list {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-width: 100%;
+  li {
+    margin: 2px;
+  }
+}
+
+.pagination-previous,
+.pagination-next,
+.pagination-link,
+.pagination-ellipsis {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+  height: 3.5em;
+  min-width: 3.5em;
+  line-height: 1.5;
+  position: relative;
+}
+
+.pagination-next,
+.pagination-previous {
+  min-width: 7em;
+}
+
+.pagination-link {
+  @include mixins.button-color();
+}
+.pagination-link:hover,
+.pagination-link:focus {
+  @include mixins.button-color-hover();
+}
+.pagination-link.is-current {
+  @include mixins.button-selected();
+}
+
+.pagination-previous-next-disabled {
+  pointer-events: none;
+  background-color: lighten($primary, 20%);
+}
+
+.back-to-top {
+  background-color: #7760a9;
+  display: none;
+  align-self: end;
+  justify-self: end;
+  border: none;
+  outline: none;
+  position: sticky;
+  bottom: 45px;
+  z-index: 99;
+  padding: 0px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  min-height: 4.2em;
+  min-width: 4.2em;
+  margin: 0px;
+  box-shadow: 5px 5px 10px -1px #9381bb;
+  img {
+    fill: white;
+    height: 0.8em;
+    align-self: end;
+    justify-self: center;
+  }
+}
+
+.back-to-top:active {
+  transform: translate(5px, 5px);
+  box-shadow: unset;
+}
+
+@media screen and (min-width: 769px), print {
+  .pagination {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .pagination-list {
+    align-items: center;
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 769px), print {
+  .pagination-list {
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    order: 1;
+  }
+  .pagination-list {
+    flex-wrap: wrap;
+  }
+  .pagination,
+  .pagination-list {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pagination:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 769px), print {
+  .pagination.is-centered .pagination-list {
+    justify-content: center;
+    order: 2;
+  }
+  .pagination-previous,
+  .pagination-next,
+  .pagination-link,
+  .pagination-ellipsis {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: calc(0.75em - 1px);
+    padding-right: calc(0.75em - 1px);
+    padding-top: calc(0.5em - 1px);
+    position: relative;
+    vertical-align: top;
+    font-size: 2.34em;
+    justify-content: center;
+    margin: 0.25rem;
+    text-align: center;
+  }
+  .pagination-link,
+  .pagination-ellipsis {
+    min-width: 2.5em;
+  }
+  .pagination-previous,
+  .pagination-next {
+    min-width: 7em;
+  }
+  .back-to-top {
+    background-color: #7760a9;
+    display: none;
+    border: none;
+    outline: none;
+    position: sticky;
+    bottom: 45px;
+    z-index: 99;
+    padding: 0px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    min-height: 4.2em;
+    min-width: 4.2em;
+    margin-right: 12rem;
+    box-shadow: 5px 5px 10px -1px #9381bb;
+  }
+}

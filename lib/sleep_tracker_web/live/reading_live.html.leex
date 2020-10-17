@@ -1,0 +1,23 @@
+<%= for reading <- @readings do %>
+    <tr>
+      <td><%= reading.id %></td>
+      <td><%= reading.sleep_goal %></td>
+      <td><%= reading.quality_sleep_goal %></td>
+      <td><%= reading.deep_sleep_goal %></td>
+      <td><%= reading.sleep_percentage %></td>
+      <td><%= reading.quality_sleep_percentage %></td>
+      <td><%= reading.deep_sleep_percentage %></td>
+      <td><%= reading.sleep_hours %></td>
+      <td><%= reading.quality_sleep_hours %></td>
+      <td><%= reading.deep_sleep_hours %></td>
+      <td><%= reading.bpm %></td>
+      <td><%= reading.sleep_rating %></td>
+      <td><%= reading.inserted_at %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.reading_path(@socket, :show, reading) %></span>
+        <span><%= link "Edit", to: Routes.reading_path(@socket, :edit, reading) %></span>
+        <span><%= link "Delete", to: Routes.reading_path(@socket, :delete, reading), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>

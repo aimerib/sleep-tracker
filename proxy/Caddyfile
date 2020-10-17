@@ -1,0 +1,16 @@
+{
+    email aimeri@baddouh.me
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+www.sleeptracker.io, sleeptracker.io {
+    reverse_proxy http://app:4000
+}
+
+portainer.sleeptracker.io {
+    reverse_proxy http://portainer:9000
+}
+
+dbmanager.sleeptracker.io {
+    reverse_proxy http://db-manager:5000
+}

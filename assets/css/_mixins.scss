@@ -1,0 +1,78 @@
+@use 'variables' as *;
+@mixin button-color($secondary-button: false) {
+  @if $secondary-button {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $text-light;
+  }
+  @else {
+    background-color: $primary;
+    border-color: $primary;
+    color: $text-light;
+  }
+}
+
+@mixin button-outline-color($secondary-button: false) {
+  @if $secondary-button {
+    background-color: transparent;
+    border-color: $secondary;
+    color: $secondary;
+  }
+  @else {
+    background-color: transparent;
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+@mixin button-outline-color-hover($secondary-button: false) {
+  @if $secondary-button {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $text-light;
+  }
+  @else {
+    background-color: $primary;
+    border-color: $primary;
+    color: $text-light;
+  }
+}
+
+@mixin button-clear-color($secondary-button: false) {
+  @if $secondary-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: $secondary;
+  }
+  @else {
+    background-color: transparent;
+    border-color: transparent;
+    color: $primary;
+  }
+}
+
+@mixin button-color-hover($secondary-button: false) {
+  @if $secondary-button {
+    background-color: darken($secondary, $darken-factor);
+    border-color: darken($secondary, $darken-factor);
+    color: $text-light;
+  }
+  @else {
+    background-color: darken($primary, $darken-factor);
+    border-color: darken($primary, $darken-factor);
+    color: $text-light;
+  }
+}
+
+@mixin button-selected($secondary-button: false) {
+  @if $secondary-button {
+    background-color: darken($secondary, $selected-darken-factor);
+    border-color: darken($secondary, $selected-darken-factor);
+    color: $text-light;
+  }
+  @else {
+    background-color: darken($primary, $selected-darken-factor);
+    border-color: darken($primary, $selected-darken-factor);
+    color: $text-light;
+  }
+}

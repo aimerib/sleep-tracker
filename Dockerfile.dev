@@ -1,0 +1,38 @@
+# File: docker_phx/Dockerfile
+FROM elixir:1.10-alpine as build
+
+# install build dependencies
+RUN apk add --update git build-base nodejs npm yarn python
+
+RUN mkdir /app
+WORKDIR /app
+
+# install Hex + Rebar
+RUN mix do local.hex --force, local.rebar --force
+
+# set build ENV
+ENV MIX_ENV=prod
+
+# install mix dependencies
+COPY mix.exs mix.lock ./
+COPY config config
+RUN mix deps.get --only $MIX_ENV
+RUN mix deps.compile
+
+
+# build assets
+COPY assets/package.json assets/package-lock.json ./assets/
+RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+
+COPY assets assets
+RUN npm run --prefix ./assets deploy
+RUN mix phx.digest
+
+# build project
+COPY priv priv
+COPY lib lib
+RUN mix compile
+RUN mix ecto.setup
+
+# Run server for development. No need for a release
+CMD ["mix", "phx.server"]
