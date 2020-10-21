@@ -1,0 +1,178 @@
+/* CSS Reset */
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Styles */
+body {
+  background-color: #645394;
+  color: white;
+  font-family: "Comfortaa", cursive;
+}
+header {
+  position: sticky;
+  top: 0;
+}
+.nav-bar {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background-color: rgba(100, 83, 148, 0.3);
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  row-gap: 10px;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+  transition-property: background-color, box-shadow;
+  transition-duration: 500ms;
+  transition-timing-function: linear;
+
+  * > img {
+    max-height: 2.5rem;
+  }
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+.nav-links {
+  line-height: 2.5rem;
+  background: #8375a9;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  z-index: -10;
+  transform: scale(0);
+  transform-origin: right top;
+  position: absolute;
+  right: 0;
+  width: 90vw;
+  height: 45vh;
+  border-radius: 50% 0px 50% 50%;
+  transition: transform 0.4s ease 0s, opacity 0.15s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+  a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-family: "Balsamiq Sans", cursive;
+    font-size: 2.2rem;
+    font-weight: bold;
+    max-width: 90vw;
+    padding: 20px 0px 20px 60px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 3rem 1fr;
+    grid-template-rows: 4rem;
+    align-items: center;
+    -moz-column-gap: 20px;
+    column-gap: 20px;
+  }
+}
+.nav-links_showing {
+  opacity: 1;
+  z-index: 10;
+  transform: scale(1);
+}
+
+.nav-bar_scrolling {
+  background-color: rgba(100, 83, 148, 1);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.menu {
+  width: 40px;
+  height: 40px;
+}
+
+.menu-close {
+  align-self: flex-end;
+  margin: 20px 30px 20px 0px;
+}
+
+.main {
+  background-size: 80vh;
+  background-repeat: no-repeat;
+  background-position-x: -20vw;
+  margin-top: 0px;
+  background-image: url("/images/girl_sleeping_with_dog.png");
+}
+
+.content {
+  padding-top: 44vh;
+}
+
+.container {
+  margin: 0px 0px 0px 0px;
+  padding: 1.5rem;
+}
+.container_alternate {
+  background-color: white;
+  color: #333333;
+}
+.cta {
+  padding: 3rem;
+  display: grid;
+  .cta-button {
+    border: #645394 8px solid;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 40px;
+    background-color: transparent;
+    text-decoration: none;
+    font-family: "Balsamiq Sans", cursive;
+    font-weight: bold;
+    color: #645394;
+    &:hover {
+      background-color: #645394;
+      color: white;
+    }
+  }
+}
+/* Breakpoints */
+@media screen and (min-width: 768px) {
+  .nav-bar {
+    .nav-links {
+      column-gap: 80px;
+    }
+  }
+}

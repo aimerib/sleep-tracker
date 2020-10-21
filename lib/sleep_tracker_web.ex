@@ -42,6 +42,16 @@ defmodule SleepTrackerWeb do
     end
   end
 
+  def landing_page_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/sleep_tracker_web/templates",
+        layout: {SleepTrackerWeb.LandingPageView, "landing_layout.html"}
+
+      unquote(view_helpers())
+    end
+  end
+
   def live_view do
     quote do
       use Phoenix.LiveView,

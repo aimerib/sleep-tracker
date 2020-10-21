@@ -17,6 +17,10 @@ defmodule SleepTrackerWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :landing do
+    plug :put_layout, {SleepTrackerWeb.LayoutView, :landing_layout}
+  end
+
   # scope "/", SleepTrackerWeb do
   #   pipe_through :browser
 
@@ -24,7 +28,7 @@ defmodule SleepTrackerWeb.Router do
   # end
 
   scope "/", SleepTrackerWeb do
-    pipe_through :browser
+    pipe_through [:browser, :landing]
     get "/", LandingPageController, :index
   end
 
