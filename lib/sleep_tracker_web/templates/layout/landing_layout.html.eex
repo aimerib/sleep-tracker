@@ -17,7 +17,7 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/landing.js") %>"></script>
   </head>
   <body>
-    <main role="main" class="main">
+    <main role="main">
       <header>
         <nav role="navigation" class="nav-bar">
           <a href="<%= Routes.landing_page_path(@conn, :index) %>">

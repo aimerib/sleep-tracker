@@ -1,20 +1,18 @@
+<div class="main">
+  <img src="<%= Routes.static_path(@conn, "/images/backgrounds/girl_sleeping_with_dog_w_1400.png") %>"></img>
+</div>
 <div class="content">
+  <%= render SleepTrackerWeb.LandingPageView, "hero.html", conn: @conn %>
+  <div class="container">
+    <h2>Sleep better</h2>
+    <br />
+    <p>Nay, but this dotage of our general's O'erflows the measure. Speak you so gently? Pardon me, I pray you; I thought that all things had been savage here, And therefore put I on the countenance Of stern commandment.  Truly, shepherd, in respect of itself, it is a good life; but in respect that it is a shepherd's life, it is nought.  </p>
+  </div>
   <div class="container container_alternate">
-    <h2>Track your sleep over time</h2>
+    <h2>Analyze your sleep</h2>
     <br/>
-    <img src="<%= Routes.static_path(@conn, "/images/chart.png") %>"></img>
-  <p>Yes, so please your Majesty. I did go between them, as I said; but more than that, he loved her-for indeed he was mad for her, and talk'd of Satan, and of Limbo, and of Furies, and I know not what.  To-day my Lord of Amiens and myself Did steal behind him as he lay along Under an oak whose antique root peeps out Upon the brook that brawls along this wood!  To the which place a poor sequest'red stag, That from the hunter's aim had ta'en a hurt, Did come to languish; and, indeed, my lord, The wretched animal heav'd forth such groans That their discharge did stretch his leathern coat Almost to bursting.</p>
-</div>
-<div class="container">
-  <h2>Sleep better</h2>
-  <br />
-  <p>Nay, but this dotage of our general's O'erflows the measure. Speak you so gently? Pardon me, I pray you; I thought that all things had been savage here, And therefore put I on the countenance Of stern commandment.  Truly, shepherd, in respect of itself, it is a good life; but in respect that it is a shepherd's life, it is nought.  </p>
-</div>
-<div class="container container_alternate">
-  <h2>Analyze your sleep</h2>
-  <br/>
-  <img src="<%= Routes.static_path(@conn, "/images/sleep_analysis.svg") %>"></img>
-<p>I have not slept one wink.  Those his goodly eyes, That o'er the files and musters of the war Have glow'd like plated Mars, now bend, now turn, The office and devotion of their view Upon a tawny front. Young man, have you challeng'd Charles the wrestler?</p>
+    <img src="<%= Routes.static_path(@conn, "/images/sleep_analysis.svg") %>"></img>
+  <p>I have not slept one wink.  Those his goodly eyes, That o'er the files and musters of the war Have glow'd like plated Mars, now bend, now turn, The office and devotion of their view Upon a tawny front. Young man, have you challeng'd Charles the wrestler?</p>
 </div>
 <div class="container">
   <h2>Analyze your sleep</h2>
