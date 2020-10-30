@@ -36,6 +36,7 @@ ul {
 img {
   max-width: 100%;
   height: auto;
+  width: 100%;
 }
 
 /* Styles */
@@ -65,6 +66,7 @@ header {
 
   * > img {
     max-height: 2.5rem;
+    width: initial;
   }
 }
 
@@ -127,6 +129,7 @@ h2 {
   margin: 20px 30px 20px 0px;
 }
 
+/*
 .main {
   background-size: 80vh;
   background-repeat: no-repeat;
@@ -134,9 +137,21 @@ h2 {
   margin-top: 0px;
   background-image: url("/images/girl_sleeping_with_dog.png");
 }
-
-.content {
-  padding-top: 40vh;
+*/
+.main {
+  /*
+  height: 66vw;
+  background-attachment: fixed;
+  background-position: center -9%;
+  background-repeat: no-repeat;
+  */
+  margin-top: calc((2.8rem + 30px) / -1);
+  /*
+  background-image: url("/images/backgrounds/girl_sleeping_with_dog_w_480.png");
+*/
+  & > img {
+    margin-bottom: -4px;
+  }
 }
 
 .container {
@@ -168,11 +183,45 @@ h2 {
     }
   }
 }
+
 /* Breakpoints */
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 481px) {
+  .main {
+    & > img {
+      margin-top: -66px;
+    }
+  }
+}
+
+@media only screen and (min-width: 769px) {
   .nav-bar {
     .nav-links {
       column-gap: 80px;
+    }
+  }
+  .main {
+    & > img {
+      margin-top: -145px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (min-width: 1300px) {
+}
+@media only screen and (min-width: 1400px) {
+  .main {
+    & > img {
+      margin-top: -199px;
+    }
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .main {
+    & > img {
+      margin-top: -320px;
     }
   }
 }
