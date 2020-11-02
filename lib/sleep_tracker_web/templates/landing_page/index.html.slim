@@ -1,0 +1,40 @@
+
+.main
+  img src=Routes.static_path(@conn, "/images/backgrounds/girl_sleeping_with_dog_w_1400.png")
+  .cta
+    .cta-content
+      h2 SleepTracker
+      p Understand your sleep patterns
+      = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button alternate-button"
+.content
+  .content_wrapper
+    .container.container_alternate
+      h2 Track your sleep over time
+      br
+      .container-wrapper.container-wrapper_img
+        img src=Routes.static_path(@conn, "/images/chart.png")
+        p Yes, so please your Majesty. I did go between them, as I said; but more than that, he loved her-for indeed he was mad for her, and talk'd of Satan, and of Limbo, and of Furies, and I know not what.  To-day my Lord of Amiens and myself Did steal behind him as he lay along Under an oak whose antique root peeps out Upon the brook that brawls along this wood!  To the which place a poor sequest'red stag, That from the hunter's aim had ta'en a hurt, Did come to languish; and, indeed, my lord, The wretched animal heav'd forth such groans That their discharge did stretch his leathern coat Almost to bursting.
+    .container
+      h2 Sleep better
+      br
+      .container-wrapper
+        p Nay, but this dotage of our general's O'erflows the measure. Speak you so gently? Pardon me, I pray you; I thought that all things had been savage here, And therefore put I on the countenance Of stern commandment.  Truly, shepherd, in respect of itself, it is a good life; but in respect that it is a shepherd's life, it is nought.
+    .container.container_alternate
+      h2 Analyze your sleep
+      br
+      .container-wrapper.container-wrapper_alternate.container-wrapper_img
+        img src=Routes.static_path(@conn, "/images/sleep_analysis.svg")
+        p I have not slept one wink.  Those his goodly eyes, That o'er the files and musters of the war Have glow'd like plated Mars, now bend, now turn, The office and devotion of their view Upon a tawny front. Young man, have you challeng'd Charles the wrestler?
+    .container
+      h2 Analyze your sleep
+      br
+      .container-wrapper.container-wrapper_img
+        img src=Routes.static_path(@conn, "/images/sleep_better.svg")
+        p I have not slept one wink.  Those his goodly eyes, That o'er the files and musters of the war Have glow'd like plated Mars, now bend, now turn, The office and devotion of their view Upon a tawny front. Young man, have you challeng'd Charles the wrestler?
+.container.container_alternate style="padding: 3rem; display: grid;"
+  h2 Understand your sleep patterns
+  br
+  div style="display: grid; justify-items: center; margin: 0 auto; max-width: 95ch;"
+    p Create your account now and start tracking your sleep.
+    = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button main-button"
+
