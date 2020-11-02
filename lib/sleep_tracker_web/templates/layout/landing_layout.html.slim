@@ -21,19 +21,20 @@ html lang="en"
     main role="main"
       header
         nav.nav-bar role="navigation"
-          a href="#{Routes.landing_page_path(@conn, :index)}"
-            img src="#{Routes.static_path(@conn, "/images/sleeptracker-logo-rectangle-alternate.svg")}" alt="SleepTracker Logo"
-          i.hamburger-menu
-            img src="#{Routes.static_path(@conn, "/images/icons/sleeping_moon_menu.svg")}"
-          .mobile-nav-links
-            i.hamburger-menu.hamburger-menu-close
-              img src="#{Routes.static_path(@conn, "/images/icons/close.svg")}"
-            = link to: Routes.user_registration_path(@conn, :new), class: "landing-link" do
-              img src="#{Routes.static_path(@conn, "/images/icons/register.svg")}"
-              span Sign Up
-            = link to: Routes.user_session_path(@conn, :new), class: "landing-link" do
-              img src="#{Routes.static_path(@conn, "/images/icons/log_in.svg")}"
-              span Sign In
+          div style="max-width: 85ch;"
+            a href="#{Routes.landing_page_path(@conn, :index)}"
+              img src="#{Routes.static_path(@conn, "/images/sleeptracker-logo-rectangle-alternate.svg")}" alt="SleepTracker Logo"
+            i.hamburger-menu
+              img src="#{Routes.static_path(@conn, "/images/icons/sleeping_moon_menu.svg")}"
+            .mobile-nav-links
+              i.hamburger-menu.hamburger-menu-close
+                img src="#{Routes.static_path(@conn, "/images/icons/close.svg")}"
+              = link to: Routes.user_registration_path(@conn, :new), class: "landing-link" do
+                img src="#{Routes.static_path(@conn, "/images/icons/register.svg")}"
+                span Sign Up
+              = link to: Routes.user_session_path(@conn, :new), class: "landing-link" do
+                img src="#{Routes.static_path(@conn, "/images/icons/log_in.svg")}"
+                span Sign In
       = @inner_content
 
       javascript:
