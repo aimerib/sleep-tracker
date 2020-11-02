@@ -1,0 +1,41 @@
+.container {
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: lighten($color: #645394, $amount: 10);
+}
+.container_alternate {
+  background-color: white;
+  color: #333333;
+}
+
+@media only screen and (min-width: 769px) {
+  .container-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 80px;
+    justify-items: center;
+    align-items: center;
+
+    max-width: 95ch;
+  }
+  .container-wrapper_img {
+    grid-template-columns: 1fr 1fr;
+  }
+  .container-wrapper_alternate {
+    & > img {
+      order: 1;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .container {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .container {
+    font-size: 25px;
+  }
+}
