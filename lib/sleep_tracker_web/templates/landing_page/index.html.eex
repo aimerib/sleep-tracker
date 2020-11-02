@@ -1,6 +1,12 @@
 <div class="main">
   <img src="<%= Routes.static_path(@conn, "/images/backgrounds/girl_sleeping_with_dog_w_1400.png") %>"></img>
-<p class="main-overlay"></p>
+<div class="cta">
+  <div class="cta-content">
+    <h2>SleepTracker</h2>
+    <p>Understand your sleep patterns</p>
+    <%= link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button alternate-button" %>
+  </div>
+</div>
 </div>
 <div class="content">
   <div class="content_wrapper">
@@ -29,11 +35,11 @@
   </div>
 </div>
 </div>
-<div class="container container_alternate cta">
+<div class="container container_alternate footer">
   <h2>Understand your sleep patterns</h2>
   <br/>
-  <div style="display: grid; margin: 0 auto; max-width: 95ch;">
+  <div style="display: grid; justify-items: center; margin: 0 auto; max-width: 95ch;">
     <p>Create your account now and start tracking your sleep.</p>
-    <%= link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "cta-button" %>
+    <%= link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button main-button" %>
   </div>
 </div>

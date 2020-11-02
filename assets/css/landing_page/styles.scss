@@ -76,7 +76,7 @@ h2 {
   text-align: center;
 }
 
-.nav-links {
+.mobile-nav-links {
   line-height: 2.5rem;
   background: #8375a9;
   display: flex;
@@ -88,7 +88,7 @@ h2 {
   position: absolute;
   right: 0;
   width: 90vw;
-  height: 45vh;
+  height: 90vw;
   border-radius: 50% 0px 50% 50%;
   transition: transform 0.4s ease 0s, opacity 0.15s ease;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
@@ -109,7 +109,7 @@ h2 {
     column-gap: 20px;
   }
 }
-.nav-links_showing {
+.mobile-nav-links_showing {
   opacity: 1;
   z-index: 100;
   transform: scale(1);
@@ -120,38 +120,32 @@ h2 {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7);
 }
 
-.menu {
+.hamburger-menu {
   width: 40px;
   height: 40px;
 }
 
-.menu-close {
+.hamburger-menu-close {
   align-self: flex-end;
   margin: 20px 30px 20px 0px;
 }
 
-/*
 .main {
-  background-size: 80vh;
-  background-repeat: no-repeat;
-  background-position-x: -20vw;
-  margin-top: 0px;
-  background-image: url("/images/girl_sleeping_with_dog.png");
-}
-*/
-.main {
-  /*
-  height: 66vw;
-  background-attachment: fixed;
-  background-position: center -9%;
-  background-repeat: no-repeat;
-  */
   margin-top: calc((2.8rem + 30px) / -1);
-  /*
-  background-image: url("/images/backgrounds/girl_sleeping_with_dog_w_480.png");
-*/
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   & > img {
     margin-bottom: -4px;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  & > .cta {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 5;
   }
 }
 
@@ -165,25 +159,59 @@ h2 {
   color: #333333;
 }
 
-.cta {
+.button {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 40px;
+  background-color: transparent;
+  text-decoration: none;
+  font-family: "Balsamiq Sans", cursive;
+  font-weight: bold;
+  width: 9em;
+  z-index: 10;
+}
+
+.main-button {
+  border: #645394 8px solid;
+  color: #645394;
+  &:hover {
+    background-color: #645394;
+    color: white;
+  }
+}
+.alternate-button {
+  border: white 8px solid;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: #645394;
+  }
+}
+
+.footer {
   padding: 3rem;
   display: grid;
-  .cta-button {
-    border: #645394 8px solid;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 40px;
-    background-color: transparent;
-    text-decoration: none;
-    font-family: "Balsamiq Sans", cursive;
-    font-weight: bold;
-    color: #645394;
-    &:hover {
-      background-color: #645394;
-      color: white;
-    }
+}
+
+.cta {
+  font-size: 25px;
+  display: none;
+  justify-items: end;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(100, 83, 148, 1) 50%
+  );
+}
+.cta-content {
+  margin-right: 100px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  & > * {
+    justify-self: center;
   }
 }
 .main-overlay {
@@ -200,6 +228,7 @@ h2 {
     opacity: 0;
   }
 }
+
 /* Breakpoints */
 @media only screen and (min-width: 481px) {
   .main {
@@ -223,6 +252,9 @@ h2 {
       margin-top: -145px;
     }
   }
+  .content {
+    margin-top: 50px;
+  }
   .main-overlay {
     margin-top: -145px;
   }
@@ -232,7 +264,9 @@ h2 {
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 60px;
-    box-shadow: 0px 0px 15px -3px #000000, 3px 3px 15px -3px #000000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
   .container-wrapper {
     display: grid;
@@ -257,6 +291,21 @@ h2 {
   .container {
     font-size: 20px;
   }
+  .cta {
+    display: grid;
+  }
+  .cta-content {
+    margin-right: 50px;
+  }
+  .hamburger-menu {
+    display: none;
+  }
+  .main {
+    & > img {
+      margin-top: -145px;
+      margin-left: -50px;
+    }
+  }
 }
 
 @media only screen and (min-width: 1300px) {
@@ -272,6 +321,9 @@ h2 {
   }
   .main-overlay {
     margin-top: -199px;
+  }
+  .cta-content {
+    margin-right: 100px;
   }
 }
 @media only screen and (min-width: 1600px) {
