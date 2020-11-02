@@ -1,0 +1,57 @@
+doctype html
+html lang="en"
+  eex:
+    <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="apple-touch-icon" sizes="180x180" href="<%= Routes.static_path(@conn, "/favicon/apple-touch-icon.png") %>">
+      <link rel="icon" type="image/png" sizes="32x32" href="<%= Routes.static_path(@conn, "/favicon/favicon-32x32.png") %>">
+      <link rel="icon" type="image/png" sizes="16x16" href="<%= Routes.static_path(@conn, "/favicon/favicon-16x16.png") %>">
+      <link rel="manifest" href="<%= Routes.static_path(@conn, "/favicon/site.webmanifest") %>">
+      <link rel="mask-icon" href="<%= Routes.static_path(@conn, "/favicon/site.webmanifest") %>" color="#645394">
+      <meta name="msapplication-TileColor" content="#603cba">
+      <meta name="theme-color" content="#645394">
+      <%= csrf_meta_tag() %>
+      <title>SleepTracker · Visualize your sleep health</title>
+      <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+      <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    </head>
+  body
+    .main-wrapper
+      header
+        section.container.container-header
+          nav.st-nav role="navigation"
+            / <%# <ul> %>
+            / <%# <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li> %>
+            / <%# <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            /   <%# <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) </li> %>
+            /   <%# <% end %>
+            /   <%# </ul> %>
+            = render "_user_menu.html", assigns
+          a.phx-logo href="#{Routes.landing_page_path(@conn, :index)}"
+            img src="#{Routes.static_path(@conn, "/images/sleeptracker-logo-rectangle-alternate.svg")}" alt="SleepTracker Logo"
+      main.container-main role="main"
+        p.alert.alert-info role="alert" = get_flash(@conn, :info)
+        p.alert.alert-danger role="alert" = get_flash(@conn, :error)
+        = @inner_content
+        button onclick="topFunction()" class="back-to-top pagination-link" title="Go to top"
+          div
+            img src="#{Routes.static_path(@conn, "/images/arrow.svg")}" alt="Back to top"
+          div Top
+javascript:
+  backToTopButton = document.querySelector(".back-to-top");
+  window.onscroll = function () { scrollFunction() };
+  function scrollFunction() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      backToTopButton.style.display = "grid";
+    } else {
+      backToTopButton.style.display = "none";
+    }
+  }
+  function topFunction() {
+    window.scroll({
+    top: 0,
+    behavior: 'smooth'
+  });
+  }

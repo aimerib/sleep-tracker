@@ -1,0 +1,47 @@
+= if @current_user do
+  .user-menu
+    div
+      = @current_user.full_name
+    img.avatar src="#{@current_user.avatar}"
+    .user-menu-wrapper
+      .user-menu-options
+        .user-menu-avatar
+          = link to: Routes.user_settings_path(@conn, :edit) do
+            img.avatar src="#{@current_user.avatar}"
+            div
+              = @current_user.full_name
+        = link to: Routes.user_settings_path(@conn, :edit) do
+          img src="#{Routes.static_path(@conn, "/images/settings.svg")}" alt="Settings"
+          p Settings
+        = link to: Routes.user_session_path(@conn, :delete), method: :delete do
+          img src="#{Routes.static_path(@conn, "/images/logout.svg")}" alt="Log out"
+          p Log out
+- else
+  .login-register-menu
+    = link "Register", to: Routes.user_registration_path(@conn, :new)
+    = link "Log in", to: Routes.user_session_path(@conn, :new)
+
+javascript:
+  const userMenu = document.querySelector(".user-menu");
+  const userMenuWrapper = document.querySelector(".user-menu-wrapper")
+
+  if (userMenuWrapper) {
+    userMenuWrapper.style.width = getComputedStyle( document.querySelector(".user-menu")).width
+    userMenu.addEventListener("click", () => userMenuWrapper.classList.toggle("user-menu-wrapper-displaying"))
+  }
+  //userMenu.addEventListener("click", () => toggleVisibility(userMenuOptions))
+
+
+  toggleVisibility = el => {
+    if (el.style.display === "none") {
+      el.style.display = "unset";
+    } else {
+      el.style.display = "none";
+    }
+  }
+  resizeSettingsButton = () => {
+    userMenuWrapper.style.width = getComputedStyle(
+      document.querySelector(".user-menu")
+    ).width;
+  };
+  window.onresize = resizeSettingsButton;

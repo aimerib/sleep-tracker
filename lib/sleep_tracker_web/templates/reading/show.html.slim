@@ -1,0 +1,44 @@
+h1 Show Reading
+ul
+  li
+    strong Reading:
+    = @reading.id
+  li
+    strong Sleep goal:
+    = @reading.sleep_goal
+  li
+    strong Quality sleep goal:
+    = @reading.quality_sleep_goal
+  li
+    strong Deep sleep goal:
+    = @reading.deep_sleep_goal
+  li
+    strong Sleep percentage:
+    = @reading.sleep_percentage
+  li
+    strong Quality sleep percentage:
+    = @reading.quality_sleep_percentage %>
+  li
+    strong Deep sleep percentage:
+    = @reading.deep_sleep_percentage %>
+  li
+    strong Sleep hours:
+    = @reading.sleep_hours %>
+  li
+    strong Quality sleep hours:
+    = @reading.quality_sleep_hours %>
+  li
+    strong Deep sleep hours:
+    = @reading.deep_sleep_hours
+  li
+    strong Bpm:
+    = @reading.bpm
+  li
+    strong Sleep rating:
+    = @reading.sleep_rating
+  li
+    strong Reading taken:
+    = @reading.inserted_at
+
+span = link "Edit", to: Routes.reading_path(@conn, :edit, @reading)
+span = link "Back", to: Routes.reading_path(@conn, :index)
