@@ -18,6 +18,10 @@ config :sleep_tracker, SleepTrackerWeb.Endpoint,
   pubsub_server: SleepTracker.PubSub,
   live_view: [signing_salt: "CB4Ydtlc"]
 
+config :phoenix, :template_engines,
+  slim: PhoenixSlime.Engine,
+  slime: PhoenixSlime.Engine
+
 config :sleep_tracker, SleepTrackerWeb.Mailer,
   from: "support@sleeptracker.io",
   adapter: Swoosh.Adapters.Local
