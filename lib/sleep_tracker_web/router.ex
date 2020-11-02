@@ -28,7 +28,7 @@ defmodule SleepTrackerWeb.Router do
   # end
 
   scope "/", SleepTrackerWeb do
-    pipe_through [:browser, :landing]
+    pipe_through [:browser, :landing, :redirect_if_user_is_authenticated]
     get "/", LandingPageController, :index
   end
 
