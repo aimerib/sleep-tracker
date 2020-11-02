@@ -1,0 +1,11 @@
+.footer {
+  padding: 3rem;
+  display: grid;
+  & > .footer_wrapper {
+    display: grid;
+    justify-items: center;
+    margin: 0 auto;
+    max-width: 95ch;
+    row-gap: 20px;
+  }
+}

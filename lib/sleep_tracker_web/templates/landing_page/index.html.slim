@@ -5,7 +5,7 @@
     .cta-content
       h2 SleepTracker
       p Understand your sleep patterns
-      = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button alternate-button"
+      = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button alternate-button md-btn"
 .content
   .content_wrapper
     .container.container_alternate
@@ -31,10 +31,10 @@
       .container-wrapper.container-wrapper_img
         img src=Routes.static_path(@conn, "/images/sleep_better.svg")
         p I have not slept one wink.  Those his goodly eyes, That o'er the files and musters of the war Have glow'd like plated Mars, now bend, now turn, The office and devotion of their view Upon a tawny front. Young man, have you challeng'd Charles the wrestler?
-.container.container_alternate style="padding: 3rem; display: grid;"
+.container.container_alternate.footer
   h2 Understand your sleep patterns
   br
-  div style="display: grid; justify-items: center; margin: 0 auto; max-width: 95ch;"
+  .footer_wrapper
     p Create your account now and start tracking your sleep.
-    = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button main-button"
+    = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button main-button lg-btn"
 

@@ -1,5 +1,5 @@
 .cta {
-  font-size: 25px;
+  font-size: 20px;
   display: none;
   justify-items: end;
   background: linear-gradient(
@@ -16,11 +16,15 @@
   & > * {
     justify-self: center;
   }
+  & > a {
+    margin-top: 40px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .cta {
     display: grid;
+    font-size: 20px;
   }
   .cta-content {
     margin-right: 50px;
@@ -29,6 +33,7 @@
 
 @media only screen and (min-width: 1400px) {
   .cta-content {
+    font-size: 25px;
     margin-right: 100px;
   }
 }

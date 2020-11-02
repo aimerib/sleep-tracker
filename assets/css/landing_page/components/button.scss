@@ -1,27 +1,44 @@
 .button {
   border-radius: 10px;
-  padding: 20px;
   text-align: center;
-  font-size: 2rem;
-  margin-top: 40px;
   background-color: transparent;
   text-decoration: none;
   font-family: "Balsamiq Sans", cursive;
   font-weight: bold;
-  width: 9em;
   z-index: 10;
+}
+.lg-btn {
+  min-width: 9em;
+  padding: 15px;
+  font-size: 2rem;
+  border-width: 8px;
+}
+.md-btn {
+  min-width: 8em;
+  padding: 10px;
+  font-size: 1.5rem;
+  border-width: 6px;
+}
+.sm-btn {
+  min-width: 8em;
+  padding: 10px;
+  font-size: 1rem;
+  border-width: 4px;
 }
 
 .main-button {
-  border: #645394 8px solid;
+  border-color: #645394;
+  border-style: solid;
   color: #645394;
   &:hover {
     background-color: #645394;
     color: white;
   }
 }
+
 .alternate-button {
-  border: white 8px solid;
+  border-color: white;
+  border-style: solid;
   color: white;
   &:hover {
     background-color: white;
