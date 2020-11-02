@@ -1,0 +1,17 @@
+h1 Log in
+= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f ->
+  = if @error_message do
+    .alert.alert-danger
+    p = @error_message
+  = label f, :email
+  = email_input f, :email, required: true
+  = label f, :password
+  = password_input f, :password, required: true
+  .remember_me
+    = label f, :remember_me, "Keep me logged in for 60 days"
+    = checkbox f, :remember_me
+  div
+    = submit "Log in"
+p
+  = link "Register", to: Routes.user_registration_path(@conn, :new)
+  = link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new)
