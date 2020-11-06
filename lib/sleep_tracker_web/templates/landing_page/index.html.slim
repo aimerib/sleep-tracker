@@ -1,19 +1,15 @@
-
+- cta_copy = "Start tracking your sleep patterns, and cross-analyze them against endless data points. Visualize your patterns with a fully customizable dashboard."
 .main
   img src=Routes.static_path(@conn, "/images/backgrounds/girl_sleeping_with_dog_w_1400.png")
   .cta
     .cta-content
-      h2 SleepTracker
-      p Understand your sleep patterns
-      = link "Sign Up", to: Routes.user_registration_path(@conn, :new), class: "button alternate-button md-btn"
+      h1 Understand your sleep patterns
+      p = cta_copy
+      = link to: Routes.user_registration_path(@conn, :new), class: "button alternate-button md-btn cta-btn" do
+        span Sign Up
 .content
   .content_wrapper
-    .container.container_alternate
-      h2 Track your sleep over time
-      br
-      .container-wrapper.container-wrapper_img
-        img src=Routes.static_path(@conn, "/images/chart.png")
-        p Yes, so please your Majesty. I did go between them, as I said; but more than that, he loved her-for indeed he was mad for her, and talk'd of Satan, and of Limbo, and of Furies, and I know not what.  To-day my Lord of Amiens and myself Did steal behind him as he lay along Under an oak whose antique root peeps out Upon the brook that brawls along this wood!  To the which place a poor sequest'red stag, That from the hunter's aim had ta'en a hurt, Did come to languish; and, indeed, my lord, The wretched animal heav'd forth such groans That their discharge did stretch his leathern coat Almost to bursting.
+    <%= render "_how_it_works.html", conn: @conn %>
     .container
       h2 Sleep better
       br
