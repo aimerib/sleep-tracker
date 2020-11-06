@@ -6,21 +6,20 @@
   font-family: "Balsamiq Sans", cursive;
   font-weight: bold;
   z-index: 10;
+  text-transform: uppercase;
+  min-width: 9em;
 }
 .lg-btn {
-  min-width: 9em;
-  padding: 15px;
-  font-size: 2rem;
+  padding: 15px 26px;
+  font-size: 1.5rem;
   border-width: 8px;
 }
 .md-btn {
-  min-width: 8em;
-  padding: 10px;
-  font-size: 1.5rem;
+  padding: 15px 26px;
+  font-size: 1.25rem;
   border-width: 6px;
 }
 .sm-btn {
-  min-width: 8em;
   padding: 10px;
   font-size: 1rem;
   border-width: 4px;
@@ -43,5 +42,24 @@
   &:hover {
     background-color: white;
     color: #645394;
+  }
+}
+
+.cta-btn {
+  border: none;
+  background: #7859ab;
+  background: -webkit-linear-gradient(top left, #7859ab, #c0a9e6);
+  background: -moz-linear-gradient(top left, #7859ab, #c0a9e6);
+  background: linear-gradient(to bottom right, #7859ab, #c0a9e6);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+  &:hover {
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px);
+    color: white;
+  }
+  &:active {
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(0);
+    color: white;
   }
 }

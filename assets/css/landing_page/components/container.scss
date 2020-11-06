@@ -2,11 +2,50 @@
   margin: 0 auto;
   padding: 1.5rem;
   background-color: lighten($color: #645394, $amount: 10);
+  & > h2 {
+    font-size: 1.6rem;
+  }
 }
 .container_alternate {
   background-color: white;
   color: #333333;
 }
+
+.hiw {
+  max-width: 70vw;
+  margin: 0 auto;
+  & > p {
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+  }
+}
+
+.hiw-step-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 50px;
+  align-items: center;
+  justify-items: center;
+  & > img {
+    max-width: 50%;
+  }
+  & > span {
+    font-size: 1.2rem;
+  }
+}
+
+// .hiw {
+//   & > p {
+//     font-size: 1.8rem;
+//   }
+// }
+// .hiw-step-container {
+//   max-width: 50%;
+//   & > span {
+//     font-size: 1.5rem;
+//   }
+// }
 
 @media only screen and (min-width: 769px) {
   .container-wrapper {
@@ -26,16 +65,44 @@
       order: 1;
     }
   }
+  .hiw {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .container {
-    font-size: 20px;
+    & > h2 {
+      font-size: 2.5rem;
+    }
   }
+  .hiw {
+    width: 50%;
+  }
+  // .hiw-step-container {
+  //   max-width: 50%;
+  //   & > span {
+  //     font-size: 1.5rem;
+  //   }
+  // }
 }
 
 @media only screen and (min-width: 1300px) {
   .container {
     font-size: 25px;
+  }
+  .hiw {
+    width: 100%;
+    & > p {
+      font-size: 1.8rem;
+    }
+  }
+  .hiw-step-container {
+    max-width: 50%;
+    & > span {
+      font-size: 2rem;
+    }
   }
 }
