@@ -37,64 +37,80 @@ jobs:
         run: mix deps.get
       - name: Run Tests
         run: mix test
-  publish:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+  deploy:
     needs: test
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Publish to DockerHub
-        uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: aimeri/sleep_tracker:${{ github.sha }}
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs: [test, publish]
-    steps:
-      - name: stops running docker-compose stack
-        uses: appleboy/ssh-action@master
+          ref: master
+          fetch-depth: 0
+      - uses: mhanberg/gigalixir-action@v0.1.0
         with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: cd ${{ secrets.PATH }}; docker-compose down || true
-      - uses: actions/checkout@master
-      - name: change docker-compose.yml to use newest image
-        run: 'sed -i -e "s/    image: aimeri\/sleep_tracker[:\w\d].*/    image: aimeri\/sleep_tracker:${{ github.sha }}/" docker-compose.yml'
-      - name: docker-compose via scp
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          source: "docker-compose.yml"
-          target: ${{ secrets.PATH }}
-      - name: create do cert
-        run: |
-          echo "${{secrets.DO_CERTIFICATE}}" > ca-certificate.crt
-      - name: do cert via scp
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          source: "ca-certificate.crt"
-          target: ${{ secrets.CERTIFICATE_PATH }}
-      - name: copy caddy config via scp
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          source: "./proxy/*"
-          target: ${{ secrets.PATH }}
-      - name: Executing remote  command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: cd ${{ secrets.PATH }}; echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin; docker-compose up -d
+          GIGALIXIR_USERNAME: ${{ secrets.GIGALIXIR_USERNAME }}
+          GIGALIXIR_PASSWORD: ${{ secrets.GIGALIXIR_PASSWORD }}
+          GIGALIXIR_APP: sleep-tracker
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  # publish:
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   needs: test
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Publish to DockerHub
+  #       uses: elgohr/Publish-Docker-Github-Action@master
+  #       with:
+  #         name: aimeri/sleep_tracker:${{ github.sha }}
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   needs: [test, publish]
+  #   steps:
+  #     - name: stops running docker-compose stack
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.SSHKEY }}
+  #         script: cd ${{ secrets.PATH }}; docker-compose down || true
+  #     - uses: actions/checkout@master
+  #     - name: change docker-compose.yml to use newest image
+  #       run: 'sed -i -e "s/    image: aimeri\/sleep_tracker[:\w\d].*/    image: aimeri\/sleep_tracker:${{ github.sha }}/" docker-compose.yml'
+  #     - name: docker-compose via scp
+  #       uses: appleboy/scp-action@master
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.SSHKEY }}
+  #         source: "docker-compose.yml"
+  #         target: ${{ secrets.PATH }}
+  #     - name: create do cert
+  #       run: |
+  #         echo "${{secrets.DO_CERTIFICATE}}" > ca-certificate.crt
+  #     - name: do cert via scp
+  #       uses: appleboy/scp-action@master
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.SSHKEY }}
+  #         source: "ca-certificate.crt"
+  #         target: ${{ secrets.CERTIFICATE_PATH }}
+  #     - name: copy caddy config via scp
+  #       uses: appleboy/scp-action@master
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.SSHKEY }}
+  #         source: "./proxy/*"
+  #         target: ${{ secrets.PATH }}
+  #     - name: Executing remote  command
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.SSHKEY }}
+  #         script: cd ${{ secrets.PATH }}; echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin; docker-compose up -d
