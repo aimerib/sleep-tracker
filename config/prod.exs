@@ -1,6 +1,8 @@
 use Mix.Config
 
-config :sleep_tracker, SleepTrackerWeb.Endpoint, server: true
+config :sleep_tracker, SleepTrackerWeb.Endpoint,
+  server: true,
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Do not print debug messages in production
 config :logger, level: :info
