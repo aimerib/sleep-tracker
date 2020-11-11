@@ -33,6 +33,17 @@ config :sleep_tracker, SleepTrackerWeb.Endpoint,
   url: [scheme: "https", host: "www.sleeptracker.io", port: 443],
   secret_key_base: secret_key_base
 
+config :libcluster,
+  topologies: [
+    k8s_example: [
+      strategy: Cluster.Strategy.Kubernetes,
+      config: [
+        kubernetes_selector: System.get_env("LIBCLUSTER_KUBERNETES_SELECTOR"),
+        kubernetes_node_basename: System.get_env("LIBCLUSTER_KUBERNETES_NODE_BASENAME")
+      ]
+    ]
+  ]
+
 # database_url =
 #   System.get_env("DATABASE_URL") ||
 #     raise """

@@ -84,3 +84,4 @@ inventory.yml
 
 # Ignore ssh keys
 .ssh
+ttb_last_config
