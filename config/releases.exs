@@ -10,7 +10,7 @@ database_url =
 config :sleep_tracker, SleepTracker.Repo,
   url: database_url,
   ssl: true,
-  ssl_opts: [cacertfile: '/app/certs/ca-certificate.crt'],
+  # ssl_opts: [cacertfile: '/app/certs/ca-certificate.crt'],
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 secret_key_base =
