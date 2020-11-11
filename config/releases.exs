@@ -1,17 +1,21 @@
 import Config
 
-database_url =
-  System.get_env("DATABASE_URL") ||
-    raise """
-    environment variable DATABASE_URL is missing.
-    For example: ecto://USER:PASS@HOST/DATABASE
-    """
+# database_url =
+#   System.get_env("DATABASE_URL") ||
+#     raise """
+#     environment variable DATABASE_URL is missing.
+#     For example: ecto://USER:PASS@HOST/DATABASE
+#     """
 
 config :sleep_tracker, SleepTracker.Repo,
-  url: database_url,
+  adapter: Ecto.Adapters.Postgres,
+  url: {:system, "DATABASE_URL"},
+  database: "",
+  ssl: true,
+  # url: database_url,
   # ssl: true,
   # ssl_opts: [cacertfile: '/app/certs/ca-certificate.crt'],
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "2")
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
