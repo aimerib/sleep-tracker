@@ -36,7 +36,8 @@ config :sleep_tracker, SleepTrackerWeb.Mailer,
 config :sleep_tracker, SleepTrackerWeb.Endpoint,
   http: [port: 4000],
   url: [scheme: "https", host: "www.sleeptracker.io", port: 443],
-  secret_key_base: secret_key_base
+  secret_key_base: secret_key_base,
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # ## SSL Support
 #
