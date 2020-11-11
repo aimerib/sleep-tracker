@@ -9,7 +9,7 @@ defmodule SleepTracker.Application do
     topologies = Application.get_env(:libcluster, :topologies) || []
 
     children = [
-      {Cluster.Supervisor, [topologies, [name: GigalixirGettingStarted.ClusterSupervisor]]},
+      {Cluster.Supervisor, [topologies, [name: SleepTracker.ClusterSupervisor]]},
       # Start the Ecto repository
       SleepTracker.Repo,
       # Start the Telemetry supervisor
