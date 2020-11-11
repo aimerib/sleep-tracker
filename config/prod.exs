@@ -5,12 +5,16 @@ use Mix.Config
 # Do not print debug messages in production
 config :logger, level: :info
 
+database_url =
+  System.get_env("DATABASE_URL") ||
+    raise """
+    environment variable DATABASE_URL is missing.
+    For example: ecto://USER:PASS@HOST/DATABASE
+    """
+
 config :sleep_tracker, SleepTracker.Repo,
-  url: {:system, "DATABASE_URL"},
-  database: "",
+  url: database_url,
   ssl: true,
-  # url: database_url,
-  # ssl: true,
   # ssl_opts: [cacertfile: '/app/certs/ca-certificate.crt'],
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "2")
 
