@@ -54,7 +54,6 @@ defmodule SleepTracker.MixProject do
       {:swoosh, "~> 1.0"},
       {:phoenix_swoosh, "~> 0.3"},
       {:plug_cowboy, "~> 2.0"},
-      {:logger_papertrail_backend, "~> 1.1"},
       {:honeybadger, "~> 0.1"},
       {:libcluster, "~> 3.2"}
     ]

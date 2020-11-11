@@ -5,7 +5,9 @@ config :sleep_tracker, SleepTrackerWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger,
+  level: :debug,
+  metadata: [:all]
 
 # database_url =
 #   System.get_env("DATABASE_URL") ||

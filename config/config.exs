@@ -27,15 +27,8 @@ config :logger, :console,
   format: "$time - [$level] | $metadata $message\n",
   metadata: [:all]
 
-config :logger, :logger_papertrail_backend,
-  host: "logs.papertrailapp.com:20103",
-  level: :debug,
-  system_name: "SleepTracker",
-  metadata_filter: [],
-  format: " - [$level] | $metadata $message"
-
 config :logger,
-  backends: [:console, LoggerPapertrailBackend.Logger],
+  backends: [:console],
   level: :debug,
   metadata: [:all]
 
